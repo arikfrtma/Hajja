@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulang Tahun Spesial untuk RispA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffcce6 0%, #ff99cc 50%, #ff6699 100%);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .birthday-card {
+            position: relative;
+            width: 350px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .birthday-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff3385;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .special-btn {
+            position: relative;
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            color: white;
+            background: linear-gradient(45deg, #ff3385, #ff66b3);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(255, 51, 133, 0.3);
+            transition: all 0.4s ease;
+            font-weight: 600;
+            z-index: 1;
+            margin-top: 20px;
+        }
+        
+        .special-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 51, 133, 0.4);
+        }
+        
+        .special-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .special-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .special-btn:hover::before {
+            left: 100%;
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff3385;
+            opacity: 0;
+            animation: float 6s ease-in infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 5px solid #ff3385;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: white;
+            overflow: hidden;
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #ffe6f2;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ff3385;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-card">
+        <div class="hearts" id="hearts"></div>
+        
+        <div class="photo-frame">
+            <div class="photo-placeholder">R</div>
+        </div>
+        
+        <h1>Happy Birthday Sayangku🥳</h1>
+        
+        <p>Di hari spesialmu ini, aku Mau Ucapin ...</p>
+        
+        <button class="special-btn" id="specialBtn">Click Sayang</button>
+    </div>
+    
+    <script>
+        // Create floating hearts
+        const heartsContainer = document.getElementById('hearts');
+        const colors = ['#ff3385', '#ff66b3', '#ff99cc', '#ffcce6'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        setInterval(createHeart, 300);
+        
+        // Special button effect
+        const specialBtn = document.getElementById('specialBtn');
+        
+        specialBtn.addEventListener('click', function() {
+            // Change the card content
+            document.querySelector('h1').textContent = "Untuk Kamu";
+            document.querySelector('p').innerHTML = `
+                Selamat ulang tahun sayangku!<br><br>
+                Di hari spesialmu ini, aku ingin mengucapkan terima kasih 
+                karena telah menjadi bagian dari hidupku. Semoga tahun ini 
+                membawa kebahagiaan, kesuksesan, dan semua impianmu menjadi kenyataan. Dan Aku Minta Maaf Belum Bisa Ketemu Kamu🥺 Aku Hanya Bisa Membuat Kejutan Seperti ini Hehe,Semoga Kamu suka Ya Sayang,
+                Pokonya kamu Jangan Sedih teruss Oteii Walaupun Aku Sibuk kerja Blm Bisa Nemenin Cintaku Bobo Buat Bberapa hari,Tapi Aku Gak Pernah Ada Niatan Buat Selingkuh Kok,Sehat Selalu Ya Sayangku<br><br>
+                Dari Arik 🎉
+            `;
+            
+            // Change button text
+            this.textContent = "I Love You Sayang🥳";
+            
+            // Create explosion effect
+            for (let i = 0; i < 50; i++) {
+                createHeart();
+            }
+            
+            // Change background color
+            document.body.style.background = "linear-gradient(135deg, #ff99cc 0%, #ff6699 50%, #ff3385 100%)";
+        });
+    </script>
+</body>
+</html>
